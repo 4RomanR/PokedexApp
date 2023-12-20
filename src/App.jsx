@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Pokedex from "./pages/Pokedex";
 import PokemonDetail from "./pages/PokemonDetail";
 import ProyectedRoutes from "./components/ProyectedRoutes";
+import Pagination from "./components/Pagination";
 
 function App() {
   return (
@@ -13,9 +14,11 @@ function App() {
          <Route element={<ProyectedRoutes />}>
           <Route path="/pokedex" element={<Pokedex />}/>
           <Route path="/pokedex/:id" element={<PokemonDetail />}/>
-
+          
         </Route>
+        
       </Routes>
+      
     </>
   );
 }

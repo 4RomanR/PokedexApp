@@ -25,12 +25,12 @@ const Pagination = ({ lastPage, pagesInCurrentBlock, setCurrentPage, currentPage
             <li>
                 <button
                  onClick={handleFirstPage}
-                 className="p-3 px-6 bg-red-200 rounded-md hover:bg-red-500 hover:text-white">{"<<"}</button>
+                 className="p-3 px-6 bg-red-500 rounded-md hover:bg-red-700 hover:text-white">{"<<"}</button>
             </li>
             <li>
                 <button
                  onClick={handlePreviusPage}
-                 className="p-3 px-6 bg-red-200 rounded-md hover:bg-red-500 hover:text-white">{"<"}</button>
+                 className="p-3 px-6 bg-red-500 rounded-md hover:bg-red-700 hover:text-white">{"<"}</button>
             </li>
             {
                 pagesInCurrentBlock.map((page) => (

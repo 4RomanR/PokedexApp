@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Header from "../components/Header"
+import Pagination from "../components/Pagination"
 
 const PokemonDetail = () => {
   const [pokemonInfo, setPokemonInfo] = useState(null)
@@ -55,12 +56,13 @@ const PokemonDetail = () => {
   }
 
   return (
-    <section>
+    <section  className="mb-9">
       <Header />
       <div className="text-center max-w-[600px] mx-auto">
         <header className={`${gradientByType[pokemonInfo?.types[0].type.name]} h-28`}>
           <img className="w-[200px] relative -top-24 mt-24 left-[50%] -translate-x-[50%]" src={pokemonInfo?.sprites.other["official-artwork"].front_default} alt="" />
         </header>
+
         <div className="mt-3">
           <span className={`${txtByType[pokemonInfo?.types[0].type.name]} border-slate-300 border-2 p-2 text-lg`}># {pokemonInfo?.id}</span>
           <div className="flex justify-between items-center">
@@ -68,6 +70,7 @@ const PokemonDetail = () => {
             <h3 className={`${txtByType[pokemonInfo?.types[0].type.name]} text-[40px] capitalize`}>{pokemonInfo?.name}</h3>
             <hr className="w-screen bg-slate-200 h-1 mx-2" />
           </div>
+
           <div className="flex justify-around w-[30%] mx-auto">
             <div>
               <h6 className="text-[12px]">Weight</h6>
@@ -79,6 +82,7 @@ const PokemonDetail = () => {
             </div>
           </div>
         </div>
+
         {/* TYPE-SKILLS */}
         <section className="flex justify-around">
           <div>
@@ -88,7 +92,7 @@ const PokemonDetail = () => {
                 pokemonInfo?.types.map((type) => type.type.name).join(" / ")
               }
             </p>
-           
+            
           </div>
           <div>
             <h4>Skills</h4>
@@ -99,9 +103,10 @@ const PokemonDetail = () => {
             </p>
           </div>
         </section>
+
         <section>
           <h4 className="text-start text-[28px] my-6">Stats</h4>
-          <ul className="grid gap-2 capitalize font-light">
+          <ul className="grid gap-2 capitalize font-light text-[12px]">
             {
               pokemonInfo?.stats.map((stat) =>
                 <li key={stat.stat.name}>
@@ -119,7 +124,9 @@ const PokemonDetail = () => {
             }
           </ul>
         </section>
+        
       </div>
+      
     </section>
   )
 }
