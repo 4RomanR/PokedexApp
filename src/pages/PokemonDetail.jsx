@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Header from "../components/Header"
-import Pagination from "../components/Pagination"
+import Footer from "../components/Footer"
 
 const PokemonDetail = () => {
   const [pokemonInfo, setPokemonInfo] = useState(null)
@@ -56,78 +56,82 @@ const PokemonDetail = () => {
   }
 
   return (
-    <section  className="mb-9">
-      <Header />
-      <div className="text-center max-w-[600px] mx-auto">
-        <header className={`${gradientByType[pokemonInfo?.types[0].type.name]} h-28`}>
-          <img className="w-[200px] relative -top-24 mt-24 left-[50%] -translate-x-[50%]" src={pokemonInfo?.sprites.other["official-artwork"].front_default} alt="" />
-        </header>
+    <article>
 
-        <div className="mt-3">
-          <span className={`${txtByType[pokemonInfo?.types[0].type.name]} border-slate-300 border-2 p-2 text-lg`}># {pokemonInfo?.id}</span>
-          <div className="flex justify-between items-center">
-            <hr className="w-screen bg-slate-200 h-1 mx-2" />
-            <h3 className={`${txtByType[pokemonInfo?.types[0].type.name]} text-[40px] capitalize`}>{pokemonInfo?.name}</h3>
-            <hr className="w-screen bg-slate-200 h-1 mx-2" />
-          </div>
-
-          <div className="flex justify-around w-[30%] mx-auto">
-            <div>
-              <h6 className="text-[12px]">Weight</h6>
-              <span className="text-[12px]">{pokemonInfo?.weight}</span>
-            </div>
-            <div>
-              <h6 className="text-[12px]">Height</h6>
-              <span className="text-[12px]">{pokemonInfo?.height}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* TYPE-SKILLS */}
-        <section className="flex justify-around">
-          <div>
-            <h4>Type</h4>
-            <p className="capitalize text-sm font-light border border-slate-500 p-1 px-12">
-              {
-                pokemonInfo?.types.map((type) => type.type.name).join(" / ")
-              }
-            </p>
+      <section>
+        <Header />
+        <div className="text-center max-w-[600px] mx-auto mb-9">
+          <header className={`${gradientByType[pokemonInfo?.types[0].type.name]} h-28`}>
+            <img className="w-[200px] relative -top-24 mt-24 left-[50%] -translate-x-[50%]" src={pokemonInfo?.sprites.other["official-artwork"].front_default} alt="" />
             
+          </header>
+  
+          <div className="mt-3">
+            <span className={`${txtByType[pokemonInfo?.types[0].type.name]} border-slate-300 border-2 p-2 text-lg`}># {pokemonInfo?.id}</span>
+            <div className="flex justify-between items-center">
+              <hr className="w-screen bg-slate-200 h-1 mx-2" />
+              <h3 className={`${txtByType[pokemonInfo?.types[0].type.name]} w-screen text-[40px] capitalize`}>{pokemonInfo?.name}</h3>
+              <hr className="w-screen bg-slate-200 h-1 mx-2" />
+            </div>
+  
+            <div className="flex justify-around w-[30%] mx-auto">
+              <div>
+                <h6 className="text-[12px]">Weight</h6>
+                <span className="text-[12px]">{pokemonInfo?.weight}</span>
+              </div>
+              <div>
+                <h6 className="text-[12px]">Height</h6>
+                <span className="text-[12px]">{pokemonInfo?.height}</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <h4>Skills</h4>
-            <p className="capitalize text-sm font-light border border-slate-500 p-1 px-12">
+  
+          {/* TYPE-SKILLS */}
+          <section className="flex justify-around">
+            <div>
+              <h4>Type</h4>
+              <p className={`${borderByType[pokemonInfo?.types[0].type.name]} capitalize text-sm font-light border border-slate-500 p-1 px-12`}>
+                {
+                  pokemonInfo?.types.map((type) => type.type.name).join(" / ")
+                }
+              </p>
+              
+            </div>
+            <div>
+              <h4>Skills</h4>
+              <p className="capitalize text-sm font-light border border-slate-500 p-1 px-12">
+                {
+                  pokemonInfo?.abilities.map((abilities) => abilities.ability.name).join(" / ")
+                }
+              </p>
+            </div>
+          </section>
+  
+          <section>
+            <h4 className="text-start text-[28px] my-6">Stats</h4>
+            <ul className="grid gap-2 capitalize font-light text-[12px]">
               {
-                pokemonInfo?.abilities.map((abilities) => abilities.ability.name).join(" / ")
+                pokemonInfo?.stats.map((stat) =>
+                  <li key={stat.stat.name}>
+                    <div className="flex justify-between">
+                      <h5>{stat.stat.name}</h5>
+                      <span>{stat.base_stat}/255</span>
+                    </div>
+                    <div className="h-6 bg-slate-300 rounded-sm overflow-hidden">
+                      <div style={{
+                        width: getBarProgress(stat.base_stat)
+                      }}
+                        className="h-full bg-gradient-to-r from-yellow-400 to-orange-500"></div>
+                    </div>
+                  </li>)
               }
-            </p>
-          </div>
-        </section>
-
-        <section>
-          <h4 className="text-start text-[28px] my-6">Stats</h4>
-          <ul className="grid gap-2 capitalize font-light text-[12px]">
-            {
-              pokemonInfo?.stats.map((stat) =>
-                <li key={stat.stat.name}>
-                  <div className="flex justify-between">
-                    <h5>{stat.stat.name}</h5>
-                    <span>{stat.base_stat}/255</span>
-                  </div>
-                  <div className="h-6 bg-slate-300 rounded-sm overflow-hidden">
-                    <div style={{
-                      width: getBarProgress(stat.base_stat)
-                    }}
-                      className="h-full bg-gradient-to-r from-yellow-400 to-orange-500"></div>
-                  </div>
-                </li>)
-            }
-          </ul>
-        </section>
-        
-      </div>
-      
-    </section>
+            </ul>
+          </section>
+          
+        </div>
+      </section>
+        <Footer />
+    </article>
   )
 }
 export default PokemonDetail
