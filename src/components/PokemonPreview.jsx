@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const PokemonPreview = ({ pokemonURL }) => {
+const PokemonPreview = ({ pokemonURL  }) => {
     const [pokemonInfo, setPokemonInfo] = useState(null)
     useEffect(() => {
         axios
@@ -48,7 +48,7 @@ const PokemonPreview = ({ pokemonURL }) => {
         electric:"text-yellow-500"
       }
   return (
-    <Link to={`/pokedex/${pokemonInfo?.id}`} className={`border-8 rounded-lg ${borderByType[pokemonInfo?.types[0].type.name]} w-[260px] text-center grid gap-1`}>
+    <Link to={`/pokedex/${pokemonInfo?.id}`} className={`my-3 border-8 rounded-lg ${borderByType[pokemonInfo?.types[0].type.name]} w-[260px] text-center grid gap-1`}>
         <header className={`${gradientByType[pokemonInfo?.types[0].type.name]}h-[50px] mb-9 `}>
             <img className="relative -bottom-9 w-[120px] mx-auto pt-2" src={pokemonInfo?.sprites.other["official-artwork"].front_default} alt="" />
         </header>
@@ -65,7 +65,7 @@ const PokemonPreview = ({ pokemonURL }) => {
                 pokemonInfo?.stats.map((stat) => (
                 <li key={stat.stat.name}>
                     <h5 className="uppercase text-xs text-slate-500">{stat.stat.name}</h5>
-                    <span className={`${txtByType[pokemonInfo?.types[0].type.name]}font-bold`}>{stat.base_stat}</span>
+                    <span className={`${txtByType[pokemonInfo?.types[0].type.name]} font-bold`}>{stat.base_stat}</span>
                 </li>))
             }
 

@@ -1,6 +1,6 @@
 const paginatePokemons = (pokemons, currentPage) => {
     //Cantidad de pokemons por página
-    const POKEMON_PER_PAGE = 16;
+    const POKEMON_PER_PAGE = 12;
 
     //Pokemons a renderizar
     const sliceEnd = currentPage * POKEMON_PER_PAGE;
@@ -11,7 +11,7 @@ const paginatePokemons = (pokemons, currentPage) => {
     const lastPage = Math.ceil(pokemons.length / POKEMON_PER_PAGE)
 
     //Bloque actual
-    const PAGES_PER_BLOCK = 7
+    const PAGES_PER_BLOCK = 5
     const actualBlock = Math.ceil(currentPage / PAGES_PER_BLOCK)
 
     //Paginas que se van a mostrar en el bloque actual
